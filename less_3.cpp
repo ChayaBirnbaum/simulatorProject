@@ -7,8 +7,9 @@ void main() {
 	simulator* s = new simulator();
 	std::cout << "good!!\n";
 	if (s != NULL) {
-		 s->begin();
+		s->begin();
+		std::cout << "very good!!\n";
+		s->printAllCmera();
+		delete(s);
 	}
-	std::cout << "very good!!\n";
-	delete(s);
 }

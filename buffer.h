@@ -13,11 +13,10 @@ protected:
 	int cnt;
 public:
 	buffer();
-	//void addToBuffer(baseMessage);// הוספת הודעה
 	void addToBuffer(char*);// הוספת הודעה
 	char** getBuffer();// מחזירה את ה buffer
+	int getCnt();
 	void cleanBuffer();// ריקון ה buffer
-
 };
 
 #endif

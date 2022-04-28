@@ -2,8 +2,6 @@
 #include "discovery.h"
 #include "status.h"
 
-//#include "baseMessage.h"
-
 buffer::buffer() {
 	buffer1 = NULL;
 	cnt = 0;
@@ -26,11 +24,16 @@ void buffer::addToBuffer(char* basemessage) {
 		exit(1);
 	}
 	strcpy(buffer1[cnt], basemessage);//העתקת תוכן הודעה
+	//std::cout << buffer1[cnt] << "\n";
 	cnt = cnt + 1;
 }
 
 char** buffer::getBuffer() {
 	return buffer1;
+}
+
+int buffer::getCnt() {
+	return cnt;
 }
 
 void buffer::cleanBuffer() {

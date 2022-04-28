@@ -42,15 +42,27 @@ void camera::sendToBuffer() {
 	free(arrMessage);
 	arrMessage = NULL;
 	countInArr = 0;
-	std::cout << "sendToBuffer good\n";
+	//יש לשלוח לסרבר
+	/*std::this_thread::sleep_for(2s);*/
+	/*
+	לפי הההגדרה של מספר הודעות בשניה  תשלח את הbuffer של כל מצלמה לשרת בתוספת תו המצין את ה מזהה של המצלמה ממנו הגיעה ההודעה (הוסיפי קוד זה בפונקציהsend) ותרוקן את הבפר. 
+
+
+	*/
+
 }
 
 void camera::run() {
+	int cnt = 0;
 	while (isActive)
 	{
+		std::cout << idCamera << ": run\n";
 		for (int i = 0; i < 5; i++)
 			generate();
 		sendToBuffer();
+		cnt++;
+		//if (cnt == 10)
+		//	isActive = false;
 	}
 }
 
@@ -59,7 +71,14 @@ void camera::stop() {
 }
 
 void camera::printDetailes() {
-	std::cout << idCamera << ": " << (buffer1.getBuffer() != NULL ? buffer1.getBuffer()[0][0] : ' ') << "\n";
+	std::cout << "IdCamera: " << idCamera << "\n";
+	for (int j = 0; j < getBuffer().getCnt(); j++) {
+		std::cout << j << ":" << getBuffer().getBuffer()[j][0] << "\n";
+	}
+}
+
+void camera::sendToServer() {
+
 }
 
 char camera::getIdCamera() {
@@ -69,4 +88,9 @@ char camera::getIdCamera() {
 buffer camera::getBuffer()
 {
 	return buffer1;
+}
+
+camera::~camera() {
+	if (buffer1.getBuffer() != NULL)
+		free(buffer1.getBuffer());
 }

@@ -1,11 +1,2 @@
-﻿  baseMessage.cpp
-  buffer.cpp
-E:\irox\project\less_3\buffer.cpp(28,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  camera.cpp
-  discovery.cpp
-  less_3.cpp
-E:\irox\project\less_3\less_3.cpp(6,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
-  simulator.cpp
-  status.cpp
-  Generating Code...
+﻿  simulator.cpp
   less_3.vcxproj -> E:\irox\project\Debug\less_3.exe

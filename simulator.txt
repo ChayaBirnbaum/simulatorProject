@@ -1,0 +1,11 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<simulator>
+	<!--מספר מצלמות בסימולטור-->
+	<numOfCamera>5</numOfCamera>
+	<!--מספר הודעות בשניה עבור כל מצלמה-->
+	<numMessagesInMinute>2</numMessagesInMinute>
+	<!--כתובת ip של השרת-->
+	<ip></ip>
+	<!--Port של השרת :-->
+	<port></port>
+</simulator>

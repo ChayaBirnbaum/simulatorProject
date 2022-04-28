@@ -5,14 +5,16 @@
 #include "camera.h"
 #include <thread>
 #include <iostream>
+#define len_arrCamera 5
 
 class simulator
 {
 private:
-	camera* arrCamera[5];
+	camera* arrCamera[len_arrCamera];
 public:
 	simulator();
 	void begin();
+	void printAllCmera();
 	~simulator();
 };
 

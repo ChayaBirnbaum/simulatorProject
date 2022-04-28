@@ -6,6 +6,8 @@
 #include "buffer.h"
 #include "discovery.h"
 #include "status.h"
+#include <thread>
+using namespace std::literals::chrono_literals;
 
 class camera
 {
@@ -21,9 +23,11 @@ public:
 	void sendToBuffer(); // עוברת על כל מערך ההודעות, ממירה את נתוני ההודעות לבייטים מעבירה את הנתונים מהמערך של ההודעות לbuffer, ומאפסת את מערך ההודעות
 	void run(); // קוראת ל generate ו  send  לסירוגין בלולאה כל עוד isActive שוה ל true כמו כן בפונקציה יהיה
 	void stop(); // מעדכנת את isActive ל false
+	void sendToServer();
 	void printDetailes();
 	char getIdCamera();
 	buffer getBuffer();
+	~camera();
 };
 
 #endif
