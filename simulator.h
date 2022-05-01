@@ -3,14 +3,16 @@
 
 #pragma once
 #include "camera.h"
+#include "configur.h"
 #include <thread>
 #include <iostream>
-#define len_arrCamera 5
+#define MAX_CAMERA 10
 
 class simulator
 {
 private:
-	camera* arrCamera[len_arrCamera];
+	camera** arrCamera;
+	configur* config;
 public:
 	simulator();
 	void begin();

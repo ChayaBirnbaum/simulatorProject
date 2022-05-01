@@ -42,14 +42,19 @@ void camera::sendToBuffer() {
 	free(arrMessage);
 	arrMessage = NULL;
 	countInArr = 0;
-	//יש לשלוח לסרבר
-	/*std::this_thread::sleep_for(2s);*/
-	/*
-	לפי הההגדרה של מספר הודעות בשניה  תשלח את הbuffer של כל מצלמה לשרת בתוספת תו המצין את ה מזהה של המצלמה ממנו הגיעה ההודעה (הוסיפי קוד זה בפונקציהsend) ותרוקן את הבפר. 
+	std::this_thread::sleep_for(1s);
+}
+//לתקן
+void camera::sendToServer() {
+	while (isActive) {
+		std::this_thread::sleep_for(2s);
+		std::cout << " ---send to server--- \n";
+
+		char** buffer = buffer1.getBuffer();
 
 
-	*/
-
+		buffer1.cleanBuffer();
+	}
 }
 
 void camera::run() {
@@ -72,22 +77,13 @@ void camera::stop() {
 
 void camera::printDetailes() {
 	std::cout << "IdCamera: " << idCamera << "\n";
-	for (int j = 0; j < getBuffer().getCnt(); j++) {
-		std::cout << j << ":" << getBuffer().getBuffer()[j][0] << "\n";
+	for (int j = 0; j < buffer1.getCnt(); j++) {
+		std::cout << j << ":" << buffer1.getBuffer()[j][0] << "\n";
 	}
-}
-
-void camera::sendToServer() {
-
 }
 
 char camera::getIdCamera() {
 	return idCamera;
-}
-
-buffer camera::getBuffer()
-{
-	return buffer1;
 }
 
 camera::~camera() {

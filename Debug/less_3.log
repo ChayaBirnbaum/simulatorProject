@@ -1,2 +1,6 @@
-﻿  simulator.cpp
+﻿  camera.cpp
+  less_3.cpp
+E:\irox\project\less_3\less_3.cpp(7,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  simulator.cpp
+  Generating Code...
   less_3.vcxproj -> E:\irox\project\Debug\less_3.exe

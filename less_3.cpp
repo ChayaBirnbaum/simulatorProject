@@ -1,5 +1,6 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 #include "simulator.h"
+#include "configur.h"
 
 //0556707712 מירי 
 

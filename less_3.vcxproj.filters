@@ -36,6 +36,9 @@
     <ClCompile Include="simulator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="configur.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="baseMessage.h">
@@ -56,8 +59,11 @@
     <ClInclude Include="simulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="configur.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="simulator.xml" />
+    <Text Include="config.txt" />
   </ItemGroup>
 </Project>

@@ -26,7 +26,6 @@ public:
 	void sendToServer();
 	void printDetailes();
 	char getIdCamera();
-	buffer getBuffer();
 	~camera();
 };
 
