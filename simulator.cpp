@@ -9,19 +9,19 @@ simulator::simulator() {
 		exit(1);
 	}
 	for (int i = 0; i < config->getNumOfCamera(); i++) {
-		arrCamera[i] = new camera('a' + i);
+		arrCamera[i] = new camera('A' + i);
 	}
 }
 
 void simulator::begin() {
 	int a = 0;
 	std::thread threades_camera[MAX_CAMERA];
-	std::thread threades_sendToServer[MAX_CAMERA];
+	//std::thread threades_sendToServer[MAX_CAMERA];
 	for (int i = 0; i < config->getNumOfCamera(); i++)
 	{
 		//(*(arrCamera[i])).run();
 		threades_camera[i] = std::thread(&camera::run, *(arrCamera[i]));
-		threades_sendToServer[i] = std::thread(&camera::sendToServer, *(arrCamera[i]));
+		//threades_sendToServer[i] = std::thread(&camera::sendToServer, *(arrCamera[i]));
 	}
 	char x;
 	std::cout << "Press any key to stop\n";
@@ -30,7 +30,7 @@ void simulator::begin() {
 	{
 		(*(arrCamera[i])).stop();
 		threades_camera[i].detach();//.detach();//join?
-		threades_sendToServer[i].detach();
+		//threades_sendToServer[i].detach();
 	}
 }
 

@@ -21,6 +21,11 @@ void status::print() {
 	std::cout << "messageType:" << this->messageType << " status:" << this->status1;
 }
 
+void status::printToFile(std::ofstream file){
+	file << "messageType:" << this->messageType << " status:" << this->status1;
+}
+
+
 status::status(unsigned char* massege, int id) :baseMessage(id) {
 	this->messageBuffer = (unsigned char*)malloc(14 * sizeof(char));
 	if (this->messageBuffer != NULL)

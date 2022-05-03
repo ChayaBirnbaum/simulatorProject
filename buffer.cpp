@@ -44,7 +44,7 @@ int buffer::getCnt() {
 void buffer::cleanBuffer() {
 	m->lock();
 	for (int i = 0; i < cnt; i++)
-		free(buffer1[cnt]);
+		free(buffer1[i]);
 	free(buffer1);
 	cnt = 0;
 	m->unlock();

@@ -1,4 +1,10 @@
 #include "camera.h"
+#include <sstream>
+#include <fstream>
+#include <iostream>
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#pragma comment(lib, "Ws2_32.lib")
 
 camera::camera(char id) {
 	idCamera = id;
@@ -13,7 +19,7 @@ void camera::generate() {
 	}
 	else {
 		status* s = new status((short)(rand() % 1000), (int)(rand() % 1000));
-		base = (baseMessage*)s;
+		base = (baseMessage*)s;		
 	}
 	//הכנסה למערך
 	if (arrMessage == NULL)
@@ -30,6 +36,8 @@ void camera::generate() {
 	}
 	arrMessage[countInArr] = base;
 	countInArr++;
+	std::cout << idCamera << ": generate\n";
+
 }
 
 void camera::sendToBuffer() {
@@ -44,30 +52,15 @@ void camera::sendToBuffer() {
 	countInArr = 0;
 	std::this_thread::sleep_for(1s);
 }
-//לתקן
-void camera::sendToServer() {
-	while (isActive) {
-		std::this_thread::sleep_for(2s);
-		std::cout << " ---send to server--- \n";
-
-		char** buffer = buffer1.getBuffer();
-
-
-		buffer1.cleanBuffer();
-	}
-}
 
 void camera::run() {
-	int cnt = 0;
 	while (isActive)
 	{
 		std::cout << idCamera << ": run\n";
 		for (int i = 0; i < 5; i++)
 			generate();
 		sendToBuffer();
-		cnt++;
-		//if (cnt == 10)
-		//	isActive = false;
+		sendToServer();
 	}
 }
 
@@ -89,4 +82,57 @@ char camera::getIdCamera() {
 camera::~camera() {
 	if (buffer1.getBuffer() != NULL)
 		free(buffer1.getBuffer());
+}
+
+void camera::sendToServer() {
+     	//עובד מקומית, צריך להעביר לשרת
+
+		std::this_thread::sleep_for(2s);
+
+		std::string name = "all.txt";
+		if (idCamera == 'A')
+			name = "cameraA.txt";
+		if (idCamera == 'B')
+			name = "cameraB.txt";
+		if (idCamera == 'C')
+			name = "cameraC.txt";
+		if (idCamera == 'D')
+			name = "cameraD.txt";
+		if (idCamera == 'E')
+			name = "cameraE.txt";
+
+		std::ofstream cameraFile(name, std::ios::app);
+
+		char** buffer2 = buffer1.getBuffer();
+
+		if (buffer1.getCnt() > 0) {
+			if (cameraFile.is_open())
+			{
+				std::cout << buffer1.getCnt();
+				for (int i = 0; i < buffer1.getCnt(); i++) {
+					int n = int(*(buffer2[0]));
+					if ( n == 2) {
+						cameraFile << idCamera << ": ";
+						discovery d((unsigned char*)(buffer2[i]), 2);
+						d.parseBack();
+						cameraFile << "messageType:2, angle:" << d.angle
+							<< " distance, " << d.distance
+							<< " speed " << d.speed << std::endl;
+					}
+					else {
+						cameraFile << idCamera << ": ";
+						status s((unsigned char*)(buffer2[i]), 2);
+						s.parseBack();
+						cameraFile << "messageType:2, status:" << s.status1 << std::endl;
+					}
+				}
+				std::cout << " ---send to file--- \n";
+			}
+			else
+			{
+				std::cout << "Couldn't open cmara " + idCamera;
+				std::cout << +" file for writing.\n";
+			}
+		}
+		cameraFile.close();
 }

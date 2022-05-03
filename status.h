@@ -4,6 +4,9 @@
 #include "baseMessage.h"
 #include <string.h>
 #include <iostream>
+#include <sstream>
+#include <fstream>
+
 
 class status :baseMessage
 {
@@ -14,6 +17,7 @@ public:
 	void  parseMessage();
 	void  parseBack();
 	void  print();
+	void printToFile(std::ofstream);
 };
 
 #endif
